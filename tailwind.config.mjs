@@ -8,6 +8,9 @@ export default {
         lg: "16px",
         xl: "24px",
       },
+      fontFamily: {
+        serif: ["var(--font-eb-garamond)", "serif"],
+      },
     },
   },
 };

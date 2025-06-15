@@ -1,41 +1,53 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-type JournalDocsInfoType = {
+type JournalInfo = {
+  id: string;
+  name: string;
+  createdTime: string;
+  modifiedTime: string;
+};
+
+type JournalInfoWithSlug = JournalInfo & {
+  slug: string;
+};
+
+type FetchJournalDocs = {
   loading: Boolean;
-  docs: any[];
+  docs: JournalInfoWithSlug[];
   error: string;
 };
 
 export default function Home() {
-  const [journalDocsInfo, setJournalDocsInfo] = useState<JournalDocsInfoType>({
-    loading: true,
-    docs: [],
-    error: "",
-  });
+  const [fetchJournalDocsState, setfetchJournalDocsState] =
+    useState<FetchJournalDocs>({
+      loading: true,
+      docs: [],
+      error: "",
+    });
+
+  const fetchJournalDocs = async () => {
+    try {
+      const res = await fetch("/api/get-journal-docs");
+      const resData = await res.json();
+
+      setfetchJournalDocsState({
+        loading: false,
+        docs: resData.journalDocs || [],
+        error: "",
+      });
+    } catch (error: any) {
+      console.log("Doc fetching failed with error: ", error);
+
+      setfetchJournalDocsState({
+        loading: false,
+        docs: [],
+        error: `Failed to fetch docs due to error: ${error}`,
+      });
+    }
+  };
 
   useEffect(() => {
-    const fetchJournalDocs = async () => {
-      try {
-        const res = await fetch("/api/journal-docs");
-        const resData = await res.json();
-        console.log("resData: ", resData);
-
-        setJournalDocsInfo({
-          loading: false,
-          docs: resData.journalDocs || [],
-          error: "",
-        });
-      } catch (error: any) {
-        console.log("Doc fetching failed with error: ", error);
-        setJournalDocsInfo({
-          loading: false,
-          docs: [],
-          error: `Failed to fetch docs due to error: ${error}`,
-        });
-      }
-    };
-
     fetchJournalDocs();
   }, []);
 
@@ -46,53 +58,35 @@ export default function Home() {
       </header>
 
       <main className="flex-1 w-full max-w-3xl mx-auto">
-        {journalDocsInfo.loading ? (
-          "Fetching journal docs..."
-        ) : journalDocsInfo.error ? (
-          <p>{journalDocsInfo.error}</p>
-        ) : journalDocsInfo.docs.length ? (
+        {fetchJournalDocsState.loading ? (
+          "Fetching journals..."
+        ) : fetchJournalDocsState.error ? (
+          <p>{fetchJournalDocsState.error}</p>
+        ) : fetchJournalDocsState.docs.length ? (
           <section className="journal-docs flex flex-col gap-16">
             <h3>List of journals</h3>
 
             <ul className="flex flex-col gap-8 list-none p-0">
-              {journalDocsInfo.docs
-                .map(
-                  (journalDoc: {
-                    id: string;
-                    name: string;
-                    createdTime: string;
-                    modifiedTime: string;
-                  }) => ({
-                    ...journalDoc,
-                    slug: journalDoc.name.toLowerCase().replace(/\s+/g, "-"),
-                  })
-                )
-                .map(
-                  (
-                    journalDoc: {
-                      id: string;
-                      name: string;
-                      createdTime: string;
-                      modifiedTime: string;
-                      slug: string;
-                    },
-                    index: number
-                  ) => (
-                    <li
-                      key={journalDoc.id || index}
-                      className="journal-doc flex flex-row justify-between"
+              {fetchJournalDocsState.docs
+                .map((journalDoc: JournalInfo) => ({
+                  ...journalDoc,
+                  slug: journalDoc.name.toLowerCase().replace(/\s+/g, "-"),
+                }))
+                .map((journalDoc: JournalInfoWithSlug, index: number) => (
+                  <li
+                    key={journalDoc.id || index}
+                    className="journal-doc flex flex-row justify-between"
+                  >
+                    <Link
+                      href={`/${journalDoc.slug}/${journalDoc.id}`}
+                      className="journal-name text-blue-900"
                     >
-                      <Link
-                        href={`/${journalDoc.slug}?id=${journalDoc.id}`}
-                        className="journal-name text-blue-900"
-                      >
-                        {journalDoc.name}
-                      </Link>
+                      {journalDoc.name}
+                    </Link>
 
-                      <p className="created-time">{journalDoc.createdTime}</p>
-                    </li>
-                  )
-                )}
+                    <p className="created-time">{journalDoc.createdTime}</p>
+                  </li>
+                ))}
             </ul>
           </section>
         ) : (

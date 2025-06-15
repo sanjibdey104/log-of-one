@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { google } from "googleapis";
 
-export default async function fetchJournalDocs(
+export default async function getJournalDocs(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
