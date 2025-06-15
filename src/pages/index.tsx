@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 type JournalDocsInfoType = {
   loading: Boolean;
@@ -54,27 +55,44 @@ export default function Home() {
             <h3>List of journals</h3>
 
             <ul className="flex flex-col gap-8 list-none p-0">
-              {journalDocsInfo.docs.map(
-                (
-                  journalDoc: {
+              {journalDocsInfo.docs
+                .map(
+                  (journalDoc: {
                     id: string;
                     name: string;
                     createdTime: string;
                     modifiedTime: string;
-                  },
-                  index: number
-                ) => (
-                  <li
-                    key={journalDoc.id || index}
-                    className="journal-doc flex flex-row justify-between"
-                  >
-                    <h5 className="journal-name text-blue-900">
-                      {journalDoc.name}
-                    </h5>
-                    <p className="created-time">{journalDoc.createdTime}</p>
-                  </li>
+                  }) => ({
+                    ...journalDoc,
+                    slug: journalDoc.name.toLowerCase().replace(/\s+/g, "-"),
+                  })
                 )
-              )}
+                .map(
+                  (
+                    journalDoc: {
+                      id: string;
+                      name: string;
+                      createdTime: string;
+                      modifiedTime: string;
+                      slug: string;
+                    },
+                    index: number
+                  ) => (
+                    <li
+                      key={journalDoc.id || index}
+                      className="journal-doc flex flex-row justify-between"
+                    >
+                      <Link
+                        href={`/${journalDoc.slug}?id=${journalDoc.id}`}
+                        className="journal-name text-blue-900"
+                      >
+                        {journalDoc.name}
+                      </Link>
+
+                      <p className="created-time">{journalDoc.createdTime}</p>
+                    </li>
+                  )
+                )}
             </ul>
           </section>
         ) : (
