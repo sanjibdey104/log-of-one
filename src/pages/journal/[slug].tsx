@@ -1,3 +1,4 @@
+import Header from "@/components/layout/Header";
 import {
   getJournalEntriesList,
   getJournalEntry,
@@ -26,7 +27,11 @@ export default function JournalEntry({
       </Head>
 
       <section className="journal-entry flex flex-col items-center justify-center gap-16">
-        <h2 className="journal-entry-title fg-garamond">{journalDocTitle}</h2>
+        <Header>
+          <h2 className="journal-entry-title text-lg fg-garamond">
+            {journalDocTitle}
+          </h2>
+        </Header>
 
         <div
           className="prose p-16 border border-gray-300 bg-gray-50"

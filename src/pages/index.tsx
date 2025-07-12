@@ -3,6 +3,7 @@ import Link from "next/link";
 import { JournalEntry } from "@/lib/types";
 import { getJournalEntriesList } from "@/lib/fetchJournalEntries";
 import { formatDate } from "@/lib/utils";
+import Header from "@/components/layout/Header";
 
 export default function Home({
   journalDocsList,
@@ -20,13 +21,11 @@ export default function Home({
       </Head>
 
       <section className="min-h-screen flex flex-col gap-32">
-        <header className="p-16 text-center flex flex-col gap-8">
-          <h1 className="text-xl font-semibold">Welcome to ReflectWell</h1>
-
+        <Header>
           <div className="platform-brief text-gray-600 text-sm">
-            <p>Created this space to share my internal reflections.</p>
+            <p>A space for my internal reflections</p>
           </div>
-        </header>
+        </Header>
 
         <main className="flex-1 flex flex-col gap-32">
           {journalDocsList.length ? (
