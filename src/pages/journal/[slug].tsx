@@ -13,7 +13,7 @@ export default function JournalEntry({
   return (
     <>
       <Head>
-        <title>{journalDocTitle} — MyLogue</title>
+        <title>{`${journalDocTitle} — MyLogue`}</title>
         <meta
           name="description"
           content={`Reflections on: ${journalDocTitle}`}
