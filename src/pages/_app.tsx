@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 import { EB_Garamond } from "next/font/google";
+import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 
 const ebGaramond = EB_Garamond({
@@ -8,10 +9,16 @@ const ebGaramond = EB_Garamond({
   display: "swap",
 });
 
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "700"], // you can include other weights too
+  display: "swap",
+});
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main className={ebGaramond.className}>
-      <Component {...pageProps} />;
+    <main className={inter.className}>
+      <Component {...pageProps} />
     </main>
   );
 }

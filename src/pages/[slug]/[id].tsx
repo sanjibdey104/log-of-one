@@ -56,9 +56,9 @@ export default function JournalEntry() {
       ) : fetchJournalDocState.error ? (
         <p>{fetchJournalDocState.error}</p>
       ) : fetchJournalDocState.journalDocHTML ? (
-        <section className="journal-doc flex flex-col gap-16 p-16">
+        <section className="journal-doc flex flex-col items-center justify-center gap-16 p-16 bg-gray-100">
           <div
-            className="prose max-w-none"
+            className="prose max-w-[100%] md:max-w-[70%] p-24 border border-gray-300 bg-gray-50"
             dangerouslySetInnerHTML={{
               __html: fetchJournalDocState.journalDocHTML,
             }}
