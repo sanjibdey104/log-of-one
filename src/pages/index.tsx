@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { JournalEntry } from "@/lib/types";
 import { getJournalEntriesList } from "@/lib/fetchJournalEntries";
+import { formatDate } from "@/lib/utils";
 
 export default function Home({
   journalDocsList,
@@ -41,7 +42,9 @@ export default function Home({
                       {journalDoc.name}
                     </Link>
 
-                    <p className="created-time">{journalDoc.createdTime}</p>
+                    <p className="created-time">
+                      {formatDate(journalDoc.createdTime)}
+                    </p>
                   </li>
                 ))}
               </ul>
