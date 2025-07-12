@@ -13,6 +13,6 @@ export type JournalDocSlugParam = {
 };
 
 export type JournalEntryDoc = {
-  title: string;
+  journalDocTitle: string;
   journalDocHtml: string;
 };

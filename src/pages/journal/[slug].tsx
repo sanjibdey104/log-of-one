@@ -4,22 +4,38 @@ import {
 } from "@/lib/fetchJournalEntries";
 import { JournalDocSlugParam, JournalEntryDoc } from "@/lib/types";
 import { formattedSlug } from "@/lib/utils";
+import Head from "next/head";
 
 export default function JournalEntry({
-  title,
+  journalDocTitle,
   journalDocHtml,
 }: JournalEntryDoc) {
   return (
-    <section className="journal-entry flex flex-col items-center justify-center gap-16 p-16 bg-gray-100">
-      <h3 className="journal-entry-title">{title}</h3>
+    <>
+      <Head>
+        <title>{journalDocTitle} — MyLogue</title>
+        <meta
+          name="description"
+          content={`Reflections on: ${journalDocTitle}`}
+        />
+        <meta property="og:title" content={`${journalDocTitle} — My Journal`} />
+        <meta
+          property="og:description"
+          content={`Reflections on: ${journalDocTitle}`}
+        />
+      </Head>
 
-      <div
-        className="prose max-w-[100%] md:max-w-[70%] p-24 border border-gray-300 bg-gray-50"
-        dangerouslySetInnerHTML={{
-          __html: journalDocHtml,
-        }}
-      />
-    </section>
+      <section className="journal-entry flex flex-col items-center justify-center gap-16 p-16 bg-gray-100">
+        <h3 className="journal-entry-title">{journalDocTitle}</h3>
+
+        <div
+          className="prose max-w-[100%] md:max-w-[70%] p-24 border border-gray-300 bg-gray-50"
+          dangerouslySetInnerHTML={{
+            __html: journalDocHtml,
+          }}
+        />
+      </section>
+    </>
   );
 }
 
@@ -48,7 +64,7 @@ export async function getStaticProps({ params }: JournalDocSlugParam) {
 
   return {
     props: {
-      title: curJournalDoc.name,
+      journalDocTitle: curJournalDoc.name,
       journalDocHtml,
     },
   };
