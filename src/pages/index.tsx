@@ -15,21 +15,23 @@ export default function Home({
         <title>MyLogue</title>
         <meta
           name="mylogue"
-          content="A space to share my internal reflections and much more..."
+          content="A space to share my internal reflections and much more."
         />
       </Head>
 
-      <div className="min-h-screen w-full flex flex-col justify-between p-8 gap-32">
-        <header className="w-full p-sm text-center text-xl font-semibold">
-          Welcome to MyLogue
+      <section className="min-h-screen flex flex-col gap-32">
+        <header className="p-16 text-center flex flex-col gap-8">
+          <h1 className="text-xl font-semibold">Welcome to ReflectWell</h1>
+
+          <div className="platform-brief text-gray-600 text-sm">
+            <p>Created this space to share my internal reflections.</p>
+          </div>
         </header>
 
-        <main className="flex-1 w-full max-w-3xl mx-auto">
+        <main className="flex-1 flex flex-col gap-32">
           {journalDocsList.length ? (
-            <section className="journal-docs flex flex-col gap-16">
-              <h3>List of journals</h3>
-
-              <ul className="flex flex-col gap-8 list-none p-0">
+            <section className="journal-entries-section flex flex-col gap-16">
+              <ul className="journal-entries-list flex flex-col gap-8 p-0 list-none">
                 {journalDocsList.map((journalDoc, index) => (
                   <li
                     key={index}
@@ -42,7 +44,7 @@ export default function Home({
                       {journalDoc.name}
                     </Link>
 
-                    <p className="created-time">
+                    <p className="created-time text-gray-400 text-xs">
                       {formatDate(journalDoc.createdTime)}
                     </p>
                   </li>
@@ -57,7 +59,7 @@ export default function Home({
         <footer className="w-full text-center text-sm text-gray-400">
           © 2025 MyLogue
         </footer>
-      </div>
+      </section>
     </>
   );
 }

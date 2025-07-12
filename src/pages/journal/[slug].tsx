@@ -25,11 +25,11 @@ export default function JournalEntry({
         />
       </Head>
 
-      <section className="journal-entry flex flex-col items-center justify-center gap-16 p-16 bg-gray-100">
-        <h3 className="journal-entry-title">{journalDocTitle}</h3>
+      <section className="journal-entry flex flex-col items-center justify-center gap-16">
+        <h2 className="journal-entry-title fg-garamond">{journalDocTitle}</h2>
 
         <div
-          className="prose max-w-[100%] md:max-w-[70%] p-24 border border-gray-300 bg-gray-50"
+          className="prose p-16 border border-gray-300 bg-gray-50"
           dangerouslySetInnerHTML={{
             __html: journalDocHtml,
           }}
