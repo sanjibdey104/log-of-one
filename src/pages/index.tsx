@@ -4,6 +4,7 @@ import { JournalEntry } from "@/lib/types";
 import { getJournalEntriesList } from "@/lib/fetchJournalEntries";
 import { formatDate } from "@/lib/utils";
 import Header from "@/components/layout/Header";
+import Banner from "@/components/Banner";
 
 export default function Home({
   journalDocsList,
@@ -24,7 +25,9 @@ export default function Home({
         <Header />
 
         <main className="flex-1 flex flex-col gap-48">
-          <div className="platform-intro text-sm flex flex-col gap-8">
+          <Banner />
+
+          <section className="platform-intro text-sm flex flex-col gap-8">
             <p>
               Welcome to Log of One - A space to share my internal reflections.
             </p>
@@ -54,7 +57,7 @@ export default function Home({
 
             <p className="blog-guide">Have a look around.</p>
             <p>Read some. Ponder more.</p>
-          </div>
+          </section>
 
           {journalDocsList.length ? (
             <section className="journal-entries-section flex flex-col gap-16">
