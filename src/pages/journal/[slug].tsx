@@ -4,17 +4,16 @@ import {
   getJournalEntry,
 } from "@/lib/fetchJournalEntries";
 import { JournalDocSlugParam, JournalEntryDoc } from "@/lib/types";
-import { formattedSlug } from "@/lib/utils";
+import { formatDate, formattedSlug } from "@/lib/utils";
 import Head from "next/head";
 
-export default function JournalEntry({
-  journalDocTitle,
-  journalDocHtml,
-}: JournalEntryDoc) {
+export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
+  const { journalDocDate, journalDocTitle, journalDocHtml } = journalDocData;
+
   return (
     <>
       <Head>
-        <title>{`${journalDocTitle} — MyLogue`}</title>
+        <title>{`${journalDocTitle} — Log of One`}</title>
         <meta
           name="description"
           content={`Reflections on: ${journalDocTitle}`}
@@ -28,9 +27,12 @@ export default function JournalEntry({
 
       <section className="journal-entry flex flex-col items-center justify-center gap-16">
         <Header>
-          <h2 className="journal-entry-title text-lg fg-garamond">
-            {journalDocTitle}
-          </h2>
+          <div className="journal-entry-header flex flex-col items-center fg-garamond">
+            <h2 className="journal-entry-title text-xl">{journalDocTitle}</h2>
+            <span className="journal-entry-date text-xs text-gray-500">
+              {formatDate(journalDocDate)}
+            </span>
+          </div>
         </Header>
 
         <div
@@ -69,8 +71,11 @@ export async function getStaticProps({ params }: JournalDocSlugParam) {
 
   return {
     props: {
-      journalDocTitle: curJournalDoc.name,
-      journalDocHtml,
+      journalDocData: {
+        journalDocDate: curJournalDoc.createdTime,
+        journalDocTitle: curJournalDoc.name,
+        journalDocHtml,
+      },
     },
   };
 }

@@ -13,16 +13,16 @@ export default function Home({
   return (
     <>
       <Head>
-        <title>MyLogue</title>
+        <title>Log Of One</title>
         <meta
-          name="mylogue"
+          name="logofone"
           content="A space to share my internal reflections and much more."
         />
       </Head>
 
       <section className="min-h-screen flex flex-col gap-32">
         <Header>
-          <div className="platform-brief text-gray-600 text-sm">
+          <div className="platform-brief text-gray-500 text-sm fg-garamond">
             <p>A space for my internal reflections</p>
           </div>
         </Header>
@@ -56,7 +56,7 @@ export default function Home({
         </main>
 
         <footer className="w-full text-center text-sm text-gray-400">
-          © 2025 MyLogue
+          © 2025 Log Of One
         </footer>
       </section>
     </>

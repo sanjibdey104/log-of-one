@@ -1,3 +1,3 @@
-A simple blog space to share my inner monologue, hence the name "MyLogue".
+A space to share my inner reflections and monologue.
 
-Tech uses NextJS for frontend rendering and Google Docs as CMS.
+[Next.js with Google Docs as CMS]

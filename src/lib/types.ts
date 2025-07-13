@@ -13,6 +13,9 @@ export type JournalDocSlugParam = {
 };
 
 export type JournalEntryDoc = {
-  journalDocTitle: string;
-  journalDocHtml: string;
+  journalDocData: {
+    journalDocDate: string;
+    journalDocTitle: string;
+    journalDocHtml: string;
+  };
 };
