@@ -21,16 +21,44 @@ export default function Home({
       </Head>
 
       <section className="min-h-screen flex flex-col gap-32">
-        <Header>
-          <div className="platform-brief text-gray-500 text-sm fg-garamond">
-            <p>A space for my internal reflections</p>
-          </div>
-        </Header>
+        <Header />
 
-        <main className="flex-1 flex flex-col gap-32">
+        <main className="flex-1 flex flex-col gap-48">
+          <div className="platform-intro text-sm flex flex-col gap-8">
+            <p>
+              Welcome to Log of One - A space to share my internal reflections.
+            </p>
+            <p>
+              There's a heap of thoughts wriggling inside that I've been meaning
+              to put out there for a while. The spectrum of experiences over the
+              past few years feels like a new life altogether. A part of me got
+              dropped off somewhere in that past, in a time long lost.
+            </p>
+            <p>
+              And over those year dynamics of my relationships has evolved so
+              much. I've opened up even more, been more vocal of my vulnerable
+              self, which in turn has greatly help me find some things to latch
+              on to as the storm passes. Something to hold my ground, keep me
+              sane.
+            </p>
+            <p>
+              One thing that clearly inflanted during this period has been my
+              over-thinking. Even writing down all these has been in the back
+              seat for so long. So many train of thoughts has simply derailed.
+            </p>
+            <p>
+              And this platform is an effort to bring it back on track, to have
+              more intent with my writing, and at the very least try to be
+              regular with the entries.
+            </p>
+
+            <p className="blog-guide">Have a look around.</p>
+            <p>Read some. Ponder more.</p>
+          </div>
+
           {journalDocsList.length ? (
             <section className="journal-entries-section flex flex-col gap-16">
-              <ul className="journal-entries-list flex flex-col gap-8 p-0 list-none">
+              <ul className="journal-entries-list flex flex-col gap-16 p-0">
                 {journalDocsList.map((journalDoc, index) => (
                   <li
                     key={index}
@@ -38,7 +66,7 @@ export default function Home({
                   >
                     <Link
                       href={`/journal/${journalDoc.slug}`}
-                      className="journal-name text-blue-900"
+                      className="journal-name text-sm text-blue-900"
                     >
                       {journalDoc.name}
                     </Link>
@@ -55,7 +83,7 @@ export default function Home({
           )}
         </main>
 
-        <footer className="w-full text-center text-sm text-gray-400">
+        <footer className="w-full text-center text-xs text-gray-400 fg-garamond">
           © 2025 Log Of One
         </footer>
       </section>
