@@ -11,6 +11,7 @@ import {
   JournalMetadata,
 } from "@/lib/types";
 import { formattedSlug } from "@/lib/utils";
+import Image from "next/image";
 
 export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
   const { journalMetadata, journalDocHtml } = journalDocData;
@@ -28,7 +29,7 @@ export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
         />
       </Head>
 
-      <section className="journal-entry flex flex-col items-center justify-center gap-16">
+      <section className="journal-entry-page flex flex-col items-center justify-center gap-16">
         <Header>
           <div className="journal-entry-header flex flex-col items-center fg-garamond">
             <h2 className="journal-entry-title text-xl">{doc_title}</h2>
@@ -38,14 +39,22 @@ export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
           </div>
         </Header>
 
-        <img src={doc_banner_image} alt="journale entry banner" />
+        <section className="journal-entry-content flex flex-col items-center justify-center gap-16">
+          <Image
+            src={doc_banner_image}
+            alt={`${doc_title} banner`}
+            width={1200}
+            height={600}
+            className="rounded-lg object-cover w-full"
+          />
 
-        <div
-          className="prose p-16 border border-gray-300 bg-gray-50"
-          dangerouslySetInnerHTML={{
-            __html: journalDocHtml,
-          }}
-        />
+          <div
+            className="prose p-16 border border-gray-300 bg-gray-50"
+            dangerouslySetInnerHTML={{
+              __html: journalDocHtml,
+            }}
+          />
+        </section>
       </section>
     </>
   );
