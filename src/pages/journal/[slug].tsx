@@ -3,6 +3,7 @@ import {
   getJournalEntriesList,
   getJournalEntry,
 } from "@/lib/fetchJournalEntries";
+import { syncMetadataSheetWithDocs } from "@/lib/syncMetadataSheet";
 import { JournalDocSlugParam, JournalEntryDoc } from "@/lib/types";
 import { formatDate, formattedSlug } from "@/lib/utils";
 import Head from "next/head";
@@ -58,6 +59,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: JournalDocSlugParam) {
+  await syncMetadataSheetWithDocs();
   const docs = await getJournalEntriesList();
   const curJournalDoc = docs.find(
     (journalDoc) => formattedSlug(journalDoc) === params.slug
