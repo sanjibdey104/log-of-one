@@ -17,5 +17,13 @@ export type JournalEntryDoc = {
     journalDocDate: string;
     journalDocTitle: string;
     journalDocHtml: string;
+    journalMetadata: JournalMetadata;
   };
+};
+
+export type JournalMetadata = {
+  doc_id: string;
+  doc_title: string;
+  doc_banner_image: string;
+  doc_creation_date: string;
 };

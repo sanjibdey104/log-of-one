@@ -1,6 +1,8 @@
 import { google } from "googleapis";
+import { JournalMetadata } from "./types";
+import { formatDate } from "./utils";
 
-export async function syncMetadataSheetWithDocs() {
+export async function syncMetadataSheetWithDocs(): Promise<JournalMetadata[]> {
   const googleDriveFolderId = process.env.GOOGLE_FOLDER_ID;
   const metadataSheetId = process.env.METADATA_SHEET_ID!;
   const metadataSheetTab = process.env.METADATA_SHEET_TAB || "Sheet1";
@@ -34,36 +36,47 @@ export async function syncMetadataSheetWithDocs() {
     // Read existing metadata rows (first col = docId)
     const sheetRes = await googleSheetsRef.spreadsheets.values.get({
       spreadsheetId: metadataSheetId,
-      range: `${metadataSheetTab}!A2:A`, // skip header row
+      range: `${metadataSheetTab}!A2:D`, // skip header row
     });
 
-    const existingDocIds = new Set((sheetRes.data.values ?? []).flat());
+    const existingSheetRows = sheetRes.data.values ?? [];
+    const existingDocIds = new Set(existingSheetRows.map((row) => row[0]));
 
     // Append any missing docs to the sheet
-    const newMetadataSheetRows = googleDriveDocs
+    const newSheetRows = googleDriveDocs
       .filter((doc) => !existingDocIds.has(doc.id))
       .map((doc) => [
         doc.id,
         doc.name,
         "", // banner_image (manually fill later)
-        new Date(doc.createdTime!).toISOString().slice(0, 10),
+        formatDate(doc.createdTime!),
       ]);
 
     // Metadata sheet already up to date.
-    if (newMetadataSheetRows.length === 0) return;
+    if (newSheetRows.length > 0) {
+      await googleSheetsRef.spreadsheets.values.append({
+        spreadsheetId: metadataSheetId,
+        range: `${metadataSheetTab}!A:D`,
+        valueInputOption: "USER_ENTERED",
+        requestBody: {
+          values: newSheetRows,
+        },
+      });
+    }
 
-    await googleSheetsRef.spreadsheets.values.append({
-      spreadsheetId: metadataSheetId,
-      range: `${metadataSheetTab}!A:D`,
-      valueInputOption: "USER_ENTERED",
-      requestBody: {
-        values: newMetadataSheetRows,
-      },
-    });
+    console.log(`Added ${newSheetRows.length} new rows to metadata sheet.`);
 
-    console.log(
-      `Added ${newMetadataSheetRows.length} new rows to metadata sheet.`
+    const allSheetRows = [...existingSheetRows, ...newSheetRows];
+    const completeMetadata = allSheetRows.map(
+      ([doc_id, doc_title, doc_banner_image, doc_creation_date]) => ({
+        doc_id,
+        doc_title,
+        doc_banner_image,
+        doc_creation_date,
+      })
     );
+
+    return completeMetadata;
   } catch (error: any) {
     throw new Error(`Failed to list documents: ${error.message}`);
   }

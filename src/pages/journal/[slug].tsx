@@ -1,40 +1,44 @@
+import Head from "next/head";
 import Header from "@/components/layout/Header";
 import {
   getJournalEntriesList,
   getJournalEntry,
 } from "@/lib/fetchJournalEntries";
 import { syncMetadataSheetWithDocs } from "@/lib/syncMetadataSheet";
-import { JournalDocSlugParam, JournalEntryDoc } from "@/lib/types";
-import { formatDate, formattedSlug } from "@/lib/utils";
-import Head from "next/head";
+import {
+  JournalDocSlugParam,
+  JournalEntryDoc,
+  JournalMetadata,
+} from "@/lib/types";
+import { formattedSlug } from "@/lib/utils";
 
 export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
-  const { journalDocDate, journalDocTitle, journalDocHtml } = journalDocData;
+  const { journalMetadata, journalDocHtml } = journalDocData;
+  const { doc_title, doc_creation_date, doc_banner_image } = journalMetadata;
 
   return (
     <>
       <Head>
-        <title>{`${journalDocTitle} — Log of One`}</title>
-        <meta
-          name="description"
-          content={`Reflections on: ${journalDocTitle}`}
-        />
-        <meta property="og:title" content={`${journalDocTitle} — My Journal`} />
+        <title>{`${doc_title} — Log of One`}</title>
+        <meta name="description" content={`Reflections on: ${doc_title}`} />
+        <meta property="og:title" content={`${doc_title} — My Journal`} />
         <meta
           property="og:description"
-          content={`Reflections on: ${journalDocTitle}`}
+          content={`Reflections on: ${doc_title}`}
         />
       </Head>
 
       <section className="journal-entry flex flex-col items-center justify-center gap-16">
         <Header>
           <div className="journal-entry-header flex flex-col items-center fg-garamond">
-            <h2 className="journal-entry-title text-xl">{journalDocTitle}</h2>
+            <h2 className="journal-entry-title text-xl">{doc_title}</h2>
             <span className="journal-entry-date text-xs text-gray-500">
-              {formatDate(journalDocDate)}
+              {doc_creation_date}
             </span>
           </div>
         </Header>
+
+        <img src={doc_banner_image} alt="journale entry banner" />
 
         <div
           className="prose p-16 border border-gray-300 bg-gray-50"
@@ -59,7 +63,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: JournalDocSlugParam) {
-  await syncMetadataSheetWithDocs();
+  const completeMetadata = await syncMetadataSheetWithDocs();
   const docs = await getJournalEntriesList();
   const curJournalDoc = docs.find(
     (journalDoc) => formattedSlug(journalDoc) === params.slug
@@ -70,12 +74,25 @@ export async function getStaticProps({ params }: JournalDocSlugParam) {
   }
 
   const journalDocHtml = await getJournalEntry(curJournalDoc.id);
+  const matchingJournalMetadata: JournalMetadata = completeMetadata.find(
+    (metadata) => metadata.doc_id === curJournalDoc.id
+  ) || {
+    doc_id: "",
+    doc_title: "",
+    doc_banner_image: "",
+    doc_creation_date: "",
+  };
+
+  const requiredJournalMetadata = {
+    doc_title: matchingJournalMetadata.doc_title,
+    doc_creation_date: matchingJournalMetadata.doc_creation_date,
+    doc_banner_image: matchingJournalMetadata.doc_banner_image,
+  };
 
   return {
     props: {
       journalDocData: {
-        journalDocDate: curJournalDoc.createdTime,
-        journalDocTitle: curJournalDoc.name,
+        journalMetadata: requiredJournalMetadata,
         journalDocHtml,
       },
     },
