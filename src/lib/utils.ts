@@ -11,3 +11,7 @@ export function formatDate(dateIsoString: string): string {
     day: "numeric",
   }).format(new Date(dateIsoString));
 }
+
+export function rgbToHex(r: number, g: number, b: number): string {
+  return [r, g, b].map((val) => val.toString(16).padStart(2, 0)).join("");
+}
