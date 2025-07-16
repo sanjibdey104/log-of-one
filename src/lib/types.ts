@@ -4,6 +4,7 @@ export type JournalEntry = {
   slug: string;
   createdTime: string;
   modifiedTime: string;
+  docColorTheme?: string;
 };
 
 export type JournalDocSlugParam = {
@@ -27,4 +28,10 @@ export type JournalMetadata = {
   doc_excerpt: string;
   doc_color_theme: string;
   doc_creation_date: string;
+};
+
+export type PatternType = {
+  patternId: string;
+  patternThemeColor?: string;
+  bannerHeight?: number;
 };

@@ -1,8 +1,8 @@
 import Head from "next/head";
-import Link from "next/link";
 import { JournalEntry } from "@/lib/types";
 import { getJournalEntriesList } from "@/lib/fetchJournalEntries";
-import { formatDate } from "@/lib/utils";
+import { syncMetadataSheetWithDocs } from "@/lib/syncMetadataSheet";
+
 import Header from "@/components/layout/Header";
 import HomepagePatternBanner from "@/components/Pattern";
 import JournalEntriesGrid from "@/components/JournalEntriesGrid";
@@ -72,11 +72,26 @@ export default function Home({
 }
 
 export const getStaticProps = async () => {
+  const docsMetadata = await syncMetadataSheetWithDocs();
   const journalDocsList = await getJournalEntriesList();
+
+  // complete the metadata with existing color theme
+  const hydratedDocsList = journalDocsList.map((doc) => {
+    const matchingDoc = docsMetadata.find(
+      (docMetadata) => docMetadata.doc_id === doc.id
+    );
+
+    if (matchingDoc) {
+      return {
+        ...doc,
+        docColorTheme: matchingDoc.doc_color_theme,
+      };
+    }
+  });
 
   return {
     props: {
-      journalDocsList,
+      journalDocsList: hydratedDocsList,
     },
   };
 };

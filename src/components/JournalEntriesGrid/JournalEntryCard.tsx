@@ -1,5 +1,6 @@
 import { JournalEntry } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
+
 import Link from "next/link";
 import Pattern from "../Pattern";
 
@@ -10,6 +11,7 @@ const JournalEntryCard = ({ journalDoc }: { journalDoc: JournalEntry }) => {
         <section className="card-header">
           <Pattern
             patternId={`journal-entry-${journalDoc.id}-pattern`}
+            patternThemeColor={journalDoc.docColorTheme || ""}
             bannerHeight={80}
           />
         </section>

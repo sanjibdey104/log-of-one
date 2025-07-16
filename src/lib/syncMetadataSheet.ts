@@ -1,6 +1,6 @@
 import { google } from "googleapis";
 import { JournalMetadata } from "./types";
-import { formatDate } from "./utils";
+import { formatDate, getRandomDarkerHexShade } from "./utils";
 
 export async function syncMetadataSheetWithDocs(): Promise<JournalMetadata[]> {
   const googleDriveFolderId = process.env.GOOGLE_FOLDER_ID;
@@ -48,8 +48,8 @@ export async function syncMetadataSheetWithDocs(): Promise<JournalMetadata[]> {
       .map((doc) => [
         doc.id,
         doc.name,
-        "", // doc excerpt (manually filled)
-        "", // doc color theme (manually filled)
+        "", // doc excerpt (manually updated)
+        getRandomDarkerHexShade(), // randow generate color theme
         formatDate(doc.createdTime!),
       ]);
 
