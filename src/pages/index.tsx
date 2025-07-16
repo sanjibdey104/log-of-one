@@ -5,6 +5,7 @@ import { getJournalEntriesList } from "@/lib/fetchJournalEntries";
 import { formatDate } from "@/lib/utils";
 import Header from "@/components/layout/Header";
 import HomepagePatternBanner from "@/components/Pattern";
+import JournalEntriesGrid from "@/components/JournalEntriesGrid";
 
 export default function Home({
   journalDocsList,
@@ -26,7 +27,7 @@ export default function Home({
 
         <HomepagePatternBanner patternId="homepage-pattern-banner" />
 
-        <main className="flex-1 flex flex-col gap-48">
+        <main className="flex-1 flex flex-col gap-48 pb-16">
           <section className="platform-intro text-sm flex flex-col gap-8">
             <p>
               Welcome to Log of One - A space to share my internal reflections.
@@ -59,31 +60,7 @@ export default function Home({
             <p>Read some. Ponder more.</p>
           </section>
 
-          {journalDocsList.length ? (
-            <section className="journal-entries-section flex flex-col gap-16">
-              <ul className="journal-entries-list flex flex-col gap-16 p-0">
-                {journalDocsList.map((journalDoc, index) => (
-                  <li
-                    key={index}
-                    className="journal-doc flex flex-row justify-between"
-                  >
-                    <Link
-                      href={`/journal/${journalDoc.slug}`}
-                      className="journal-name text-sm text-blue-900"
-                    >
-                      {journalDoc.name}
-                    </Link>
-
-                    <p className="created-time text-gray-400 text-xs">
-                      {formatDate(journalDoc.createdTime)}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ) : (
-            <p className="no-docs-found">No docs found.</p>
-          )}
+          <JournalEntriesGrid journalDocsList={journalDocsList} />
         </main>
 
         <footer className="w-full text-center text-xs text-gray-400 fg-garamond">
