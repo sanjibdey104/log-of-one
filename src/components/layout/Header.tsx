@@ -1,8 +1,5 @@
+import { HeaderProps } from "@/lib/types";
 import Link from "next/link";
-
-type HeaderProps = {
-  children?: React.ReactNode;
-};
 
 const Header = ({ children }: HeaderProps) => {
   return (

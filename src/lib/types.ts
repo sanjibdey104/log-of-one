@@ -1,3 +1,11 @@
+export type LayoutProps = {
+  children: React.ReactNode;
+};
+
+export type HeaderProps = {
+  children?: React.ReactNode;
+};
+
 export type JournalEntry = {
   id: string;
   name: string;
