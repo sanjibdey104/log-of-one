@@ -4,7 +4,7 @@ import { JournalEntry } from "@/lib/types";
 import { getJournalEntriesList } from "@/lib/fetchJournalEntries";
 import { formatDate } from "@/lib/utils";
 import Header from "@/components/layout/Header";
-import Banner from "@/components/Banner";
+import HomepagePatternBanner from "@/components/Pattern";
 
 export default function Home({
   journalDocsList,
@@ -24,9 +24,9 @@ export default function Home({
       <section className="min-h-screen flex flex-col gap-32">
         <Header />
 
-        <main className="flex-1 flex flex-col gap-48">
-          <Banner />
+        <HomepagePatternBanner patternId="homepage-pattern-banner" />
 
+        <main className="flex-1 flex flex-col gap-48">
           <section className="platform-intro text-sm flex flex-col gap-8">
             <p>
               Welcome to Log of One - A space to share my internal reflections.
