@@ -11,11 +11,10 @@ import {
   JournalMetadata,
 } from "@/lib/types";
 import { formattedSlug } from "@/lib/utils";
-import Image from "next/image";
 
 export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
   const { journalMetadata, journalDocHtml } = journalDocData;
-  const { doc_title, doc_creation_date, doc_banner_image } = journalMetadata;
+  const { doc_title, doc_creation_date } = journalMetadata;
 
   return (
     <>
@@ -40,14 +39,6 @@ export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
         </Header>
 
         <section className="journal-entry-content flex flex-col items-center justify-center gap-16">
-          <Image
-            src={doc_banner_image}
-            alt={`${doc_title} banner`}
-            width={1200}
-            height={600}
-            className="rounded-lg object-cover w-full"
-          />
-
           <div
             className="prose p-16 border border-gray-300 bg-gray-50"
             dangerouslySetInnerHTML={{
