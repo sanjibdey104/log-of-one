@@ -36,7 +36,7 @@ export async function syncMetadataSheetWithDocs(): Promise<JournalMetadata[]> {
     // Read existing metadata rows (first col = docId)
     const sheetRes = await googleSheetsRef.spreadsheets.values.get({
       spreadsheetId: metadataSheetId,
-      range: `${metadataSheetTab}!A2:D`, // skip header row
+      range: `${metadataSheetTab}!A2:E`, // skip header row
     });
 
     const existingSheetRows = sheetRes.data.values ?? [];
@@ -48,7 +48,8 @@ export async function syncMetadataSheetWithDocs(): Promise<JournalMetadata[]> {
       .map((doc) => [
         doc.id,
         doc.name,
-        "", // banner_image (manually fill later)
+        "", // doc excerpt (manually filled)
+        "", // doc color theme (manually filled)
         formatDate(doc.createdTime!),
       ]);
 
@@ -56,7 +57,7 @@ export async function syncMetadataSheetWithDocs(): Promise<JournalMetadata[]> {
     if (newSheetRows.length > 0) {
       await googleSheetsRef.spreadsheets.values.append({
         spreadsheetId: metadataSheetId,
-        range: `${metadataSheetTab}!A:D`,
+        range: `${metadataSheetTab}!A:E`,
         valueInputOption: "USER_ENTERED",
         requestBody: {
           values: newSheetRows,
@@ -68,10 +69,17 @@ export async function syncMetadataSheetWithDocs(): Promise<JournalMetadata[]> {
 
     const allSheetRows = [...existingSheetRows, ...newSheetRows];
     const completeMetadata = allSheetRows.map(
-      ([doc_id, doc_title, doc_banner_image, doc_creation_date]) => ({
+      ([
         doc_id,
         doc_title,
-        doc_banner_image,
+        doc_excerpt,
+        doc_color_theme,
+        doc_creation_date,
+      ]) => ({
+        doc_id,
+        doc_title,
+        doc_excerpt,
+        doc_color_theme,
         doc_creation_date,
       })
     );

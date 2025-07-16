@@ -79,14 +79,16 @@ export async function getStaticProps({ params }: JournalDocSlugParam) {
   ) || {
     doc_id: "",
     doc_title: "",
-    doc_banner_image: "",
+    doc_excerpt: "",
+    doc_color_theme: "",
     doc_creation_date: "",
   };
 
   const requiredJournalMetadata = {
     doc_title: matchingJournalMetadata.doc_title,
+    doc_excerpt: matchingJournalMetadata.doc_excerpt,
+    doc_color_theme: matchingJournalMetadata.doc_color_theme,
     doc_creation_date: matchingJournalMetadata.doc_creation_date,
-    doc_banner_image: matchingJournalMetadata.doc_banner_image,
   };
 
   return {

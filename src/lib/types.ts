@@ -24,6 +24,7 @@ export type JournalEntryDoc = {
 export type JournalMetadata = {
   doc_id: string;
   doc_title: string;
-  doc_banner_image: string;
+  doc_excerpt: string;
+  doc_color_theme: string;
   doc_creation_date: string;
 };
