@@ -7,7 +7,7 @@ import Pattern from "../Pattern";
 const JournalEntryCard = ({ journalDoc }: { journalDoc: JournalEntry }) => {
   return (
     <Link href={`/journal/${journalDoc.slug}`}>
-      <div className="journal-entry-card h-full  shadow-(--box-shadow) rounded-sm p-12 flex flex-col gap-8">
+      <div className="journal-entry-card h-full shadow-(--box-shadow) rounded-sm p-12 flex flex-col gap-8">
         <section className="card-header">
           <Pattern
             patternId={`journal-entry-${journalDoc.id}-pattern`}

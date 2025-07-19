@@ -11,10 +11,12 @@ import {
   JournalMetadata,
 } from "@/lib/types";
 import { formattedSlug } from "@/lib/utils";
+import Pattern from "@/components/Pattern";
 
 export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
   const { journalMetadata, journalDocHtml } = journalDocData;
-  const { doc_title, doc_creation_date } = journalMetadata;
+  const { doc_id, doc_title, doc_creation_date, doc_color_theme } =
+    journalMetadata;
 
   return (
     <>
@@ -37,6 +39,13 @@ export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
             </span>
           </div>
         </Header>
+
+        <Pattern
+          patternId={`journal-entry-${doc_id}-pattern`}
+          patternThemeColor={doc_color_theme || ""}
+          bannerHeight={80}
+          className="shadow-(--box-shadow)"
+        />
 
         <section className="journal-entry-content flex flex-col items-center justify-center gap-16">
           <div
@@ -85,6 +94,7 @@ export async function getStaticProps({ params }: JournalDocSlugParam) {
   };
 
   const requiredJournalMetadata = {
+    doc_id: matchingJournalMetadata.doc_id,
     doc_title: matchingJournalMetadata.doc_title,
     doc_excerpt: matchingJournalMetadata.doc_excerpt,
     doc_color_theme: matchingJournalMetadata.doc_color_theme,

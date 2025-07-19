@@ -42,4 +42,5 @@ export type PatternType = {
   patternId: string;
   patternThemeColor?: string;
   bannerHeight?: number;
+  className?: string;
 };
