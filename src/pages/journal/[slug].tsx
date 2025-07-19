@@ -12,6 +12,7 @@ import {
 } from "@/lib/types";
 import { formattedSlug } from "@/lib/utils";
 import Pattern from "@/components/Pattern";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
   const { journalMetadata, journalDocHtml } = journalDocData;
@@ -56,6 +57,8 @@ export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
           />
         </section>
       </section>
+
+      <ScrollToTopButton />
     </>
   );
 }
