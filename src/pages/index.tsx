@@ -33,31 +33,32 @@ export default function Home({
               Welcome to Log of One - A space to share my internal reflections.
             </p>
             <p>
-              There's a heap of thoughts wriggling inside that I've been meaning
-              to put out there for a while. The spectrum of experiences over the
-              past few years feels like a new life altogether. A part of me got
-              dropped off somewhere in that past, in a time long lost.
+              The spectrum of experiences over the past few years has made the
+              present feel like a new life altogether, like a part of me got
+              dropped off somewhere along the way and these entries are in an
+              effort to rediscover that old self.
             </p>
             <p>
-              And over those year dynamics of my relationships has evolved so
-              much. I've opened up even more, been more vocal of my vulnerable
-              self, which in turn has greatly help me find some things to latch
-              on to as the storm passes. Something to hold my ground, keep me
-              sane.
+              Over those years the dynamics of my relationships has evolved,
+              I've opened up more, been more vulnerable, which has greatly
+              helped me find things to latch on to as the storm passes by.
             </p>
             <p>
-              One thing that clearly inflanted during this period has been my
-              over-thinking. Even writing down all these has been in the back
-              seat for so long. So many train of thoughts has simply derailed.
+              One major culprit derailing my train of thoughts has been my
+              overthinking and procrastination. So sitting down with my thoughts
+              is my first line of defense to make some sense out of them, be
+              regular with it and eventually find my way through.
             </p>
             <p>
-              And this platform is an effort to bring it back on track, to have
-              more intent with my writing, and at the very least try to be
-              regular with the entries.
+              I've also realized many out there might struggling with similar
+              vices, so putting these thoughts out here is in hopes of sharing a
+              common ground and be there for each other.
             </p>
-
-            <p className="blog-guide">Have a look around.</p>
-            <p>Read some. Ponder more.</p>
+            <p>
+              I'll be sharing everything -- from my likes to quirks, from my
+              grief to smirks.
+            </p>
+            <p>Go ahead. Read some. Ponder more.</p>
           </section>
 
           <JournalEntriesGrid journalDocsList={journalDocsList} />
