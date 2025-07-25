@@ -4,7 +4,6 @@ import {
   getJournalEntriesList,
   getJournalEntry,
 } from "@/lib/fetchJournalEntries";
-import { syncMetadataSheetWithDocs } from "@/lib/syncMetadataSheet";
 import {
   JournalDocSlugParam,
   JournalEntryDoc,
@@ -13,6 +12,7 @@ import {
 import { formattedSlug } from "@/lib/utils";
 import Pattern from "@/components/Pattern";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
+import { fetchMetadataSheet } from "@/lib/fetchMetadataSheet";
 
 export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
   const { journalMetadata, journalDocHtml } = journalDocData;
@@ -75,7 +75,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: JournalDocSlugParam) {
-  const completeMetadata = await syncMetadataSheetWithDocs();
+  const completeMetadata = await fetchMetadataSheet();
   const docs = await getJournalEntriesList();
   const curJournalDoc = docs.find(
     (journalDoc) => formattedSlug(journalDoc) === params.slug
@@ -86,6 +86,7 @@ export async function getStaticProps({ params }: JournalDocSlugParam) {
   }
 
   const journalDocHtml = await getJournalEntry(curJournalDoc.id);
+
   const matchingJournalMetadata: JournalMetadata = completeMetadata.find(
     (metadata) => metadata.doc_id === curJournalDoc.id
   ) || {
@@ -96,18 +97,10 @@ export async function getStaticProps({ params }: JournalDocSlugParam) {
     doc_creation_date: "",
   };
 
-  const requiredJournalMetadata = {
-    doc_id: matchingJournalMetadata.doc_id,
-    doc_title: matchingJournalMetadata.doc_title,
-    doc_excerpt: matchingJournalMetadata.doc_excerpt,
-    doc_color_theme: matchingJournalMetadata.doc_color_theme,
-    doc_creation_date: matchingJournalMetadata.doc_creation_date,
-  };
-
   return {
     props: {
       journalDocData: {
-        journalMetadata: requiredJournalMetadata,
+        journalMetadata: matchingJournalMetadata,
         journalDocHtml,
       },
     },
