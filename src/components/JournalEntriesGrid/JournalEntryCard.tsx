@@ -22,8 +22,7 @@ const JournalEntryCard = ({ journalDoc }: { journalDoc: JournalEntry }) => {
           </h2>
 
           <p className="journal-entry-excerpt text-gray-600 text-xs">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi,
-            voluptates magnam? Ea debitis quas pariatur!
+            {journalDoc.docExcerpt}
           </p>
 
           <span className="journal-entry-date text-gray-400 text-xs">

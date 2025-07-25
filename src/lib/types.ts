@@ -13,6 +13,7 @@ export type JournalEntry = {
   createdTime: string;
   modifiedTime: string;
   docColorTheme?: string;
+  docExcerpt?: string;
 };
 
 export type JournalDocSlugParam = {

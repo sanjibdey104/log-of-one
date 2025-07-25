@@ -86,6 +86,7 @@ export const getStaticProps = async () => {
       return {
         ...doc,
         docColorTheme: matchingDoc.doc_color_theme,
+        docExcerpt: matchingDoc.doc_excerpt,
       };
     }
   });
