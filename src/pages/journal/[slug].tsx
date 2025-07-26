@@ -31,15 +31,17 @@ export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
         />
       </Head>
 
-      <section className="journal-entry-page flex flex-col items-center justify-center gap-16">
-        <Header>
-          <div className="journal-entry-header flex flex-col items-center fg-garamond">
-            <h2 className="journal-entry-title text-xl">{doc_title}</h2>
-            <span className="journal-entry-date text-xs text-gray-500">
-              {doc_creation_date}
-            </span>
-          </div>
-        </Header>
+      <section className="journal-entry-page flex flex-col items-center justify-center gap-24">
+        <Header />
+
+        <div className="journal-entry-header flex flex-col gap-5 items-center fg-garamond">
+          <h2 className="journal-entry-title text-xl text-center font-semibold">
+            {doc_title} longer title to test length
+          </h2>
+          <span className="journal-entry-date text-sm text-gray-500">
+            {doc_creation_date}
+          </span>
+        </div>
 
         <Pattern
           patternId={`journal-entry-${doc_id}-pattern`}
@@ -50,7 +52,7 @@ export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
 
         <section className="journal-entry-content flex flex-col items-center justify-center gap-16">
           <div
-            className="prose p-16 border border-gray-300 bg-gray-50"
+            className="prose p-16 border border-gray-300 bg-gray-50 flex flex-col gap-8 sm:gap-4"
             dangerouslySetInnerHTML={{
               __html: journalDocHtml,
             }}

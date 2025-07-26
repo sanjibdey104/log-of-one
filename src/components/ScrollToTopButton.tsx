@@ -9,7 +9,6 @@ const ScrollToTopButton = () => {
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
 
       scrollTimeoutRef.current = setTimeout(() => {
-        console.log("scrolling");
         setShow(window.scrollY > 200);
       }, 100);
     };

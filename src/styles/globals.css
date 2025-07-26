@@ -28,3 +28,13 @@ body {
 #homepage-pattern-banner {
   box-shadow: var(--box-shadow);
 }
+
+.journal-entry-content * {
+  line-height: 1.375;
+}
+
+@media (max-width: 640px) {
+  .journal-entry-content * {
+    font-size: 18px !important;
+  }
+}
