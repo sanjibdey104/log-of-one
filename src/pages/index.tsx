@@ -28,9 +28,9 @@ export default function Home({
         <HomepagePatternBanner patternId="homepage-pattern-banner" />
 
         <main className="flex-1 flex flex-col gap-48 pb-16">
-          <section className="platform-intro text-sm flex flex-col gap-8">
-            <p>
-              Welcome to Log of One - A space to share my internal reflections.
+          <section className="platform-intro text-sm flex flex-col gap-16">
+            <p className="font-semibold">
+              Welcome to Log of One : A space to share my internal reflections.
             </p>
             <p>
               The spectrum of experiences over the past few years has made the
