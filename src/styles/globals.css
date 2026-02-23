@@ -5,9 +5,9 @@
 :root {
   --spacing: 1px;
   --font-inter: "Inter", sans-serif;
-  --font-garamond: "EB Garamond", serif;
-  --box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  --font-lora: "Lora", serif;
+  --box-shadow:
+    rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   scroll-behavior: smooth;
 }
 
@@ -21,8 +21,8 @@ body {
   font-family: var(--font-inter);
 }
 
-.fg-garamond {
-  font-family: var(--font-garamond);
+.fg-lora {
+  font-family: var(--font-lora);
 }
 
 #homepage-pattern-banner {
@@ -30,11 +30,11 @@ body {
 }
 
 .journal-entry-content * {
-  line-height: 1.375;
+  line-height: 1.5;
 }
 
 @media (max-width: 640px) {
   .journal-entry-content * {
-    font-size: 18px !important;
+    font-size: 16px !important;
   }
 }

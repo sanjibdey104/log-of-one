@@ -9,7 +9,7 @@ export default {
         xl: "24px",
       },
       fontFamily: {
-        serif: ["var(--font-eb-garamond)", "serif"],
+        serif: ["var(--font-eb-lora)", "serif"],
       },
     },
   },

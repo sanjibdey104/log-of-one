@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Header from "@/components/layout/Header";
 import {
   getJournalEntriesList,
   getJournalEntry,
@@ -31,13 +30,12 @@ export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
         />
       </Head>
 
-      <section className="journal-entry-page flex flex-col items-center justify-center gap-24">
-        <Header />
-
-        <div className="journal-entry-header flex flex-col gap-5 items-center fg-garamond">
-          <h2 className="journal-entry-title text-xl text-center font-semibold">
-            {doc_title} longer title to test length
+      <section className="journal-entry-page flex flex-col items-center justify-center gap-48">
+        <div className="journal-entry-header flex flex-col gap-5 items-center fg-inter">
+          <h2 className="journal-entry-title text-xl font-semibold">
+            {doc_title}
           </h2>
+
           <span className="journal-entry-date text-sm text-gray-500">
             {doc_creation_date}
           </span>
@@ -52,7 +50,7 @@ export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
 
         <section className="journal-entry-content flex flex-col items-center justify-center gap-16">
           <div
-            className="prose p-16 border border-gray-300 bg-gray-50 flex flex-col gap-8 sm:gap-4"
+            className="prose flex flex-col gap-8 sm:gap-4"
             dangerouslySetInnerHTML={{
               __html: journalDocHtml,
             }}
@@ -80,7 +78,7 @@ export async function getStaticProps({ params }: JournalDocSlugParam) {
   const completeMetadata = await fetchMetadataSheet();
   const docs = await getJournalEntriesList();
   const curJournalDoc = docs.find(
-    (journalDoc) => formattedSlug(journalDoc) === params.slug
+    (journalDoc) => formattedSlug(journalDoc) === params.slug,
   );
 
   if (!curJournalDoc) {
@@ -90,7 +88,7 @@ export async function getStaticProps({ params }: JournalDocSlugParam) {
   const journalDocHtml = await getJournalEntry(curJournalDoc.id);
 
   const matchingJournalMetadata: JournalMetadata = completeMetadata.find(
-    (metadata) => metadata.doc_id === curJournalDoc.id
+    (metadata) => metadata.doc_id === curJournalDoc.id,
   ) || {
     doc_id: "",
     doc_title: "",

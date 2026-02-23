@@ -3,7 +3,6 @@ import { JournalEntry } from "@/lib/types";
 import { getJournalEntriesList } from "@/lib/fetchJournalEntries";
 import { syncMetadataSheetWithDocs } from "@/lib/syncMetadataSheet";
 
-import Header from "@/components/layout/Header";
 import HomepagePatternBanner from "@/components/Pattern";
 import JournalEntriesGrid from "@/components/JournalEntriesGrid";
 
@@ -23,8 +22,6 @@ export default function Home({
       </Head>
 
       <section className="min-h-screen flex flex-col gap-32">
-        <Header />
-
         <HomepagePatternBanner patternId="homepage-pattern-banner" />
 
         <main className="flex-1 flex flex-col gap-48 pb-16">
@@ -63,10 +60,6 @@ export default function Home({
 
           <JournalEntriesGrid journalDocsList={journalDocsList} />
         </main>
-
-        <footer className="w-full text-center text-xs text-gray-400 fg-garamond">
-          © 2025 Log Of One
-        </footer>
       </section>
     </>
   );
@@ -79,7 +72,7 @@ export const getStaticProps = async () => {
   // complete the metadata with existing color theme
   const hydratedDocsList = journalDocsList.map((doc) => {
     const matchingDoc = docsMetadata.find(
-      (docMetadata) => docMetadata.doc_id === doc.id
+      (docMetadata) => docMetadata.doc_id === doc.id,
     );
 
     if (matchingDoc) {
