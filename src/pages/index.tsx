@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 
 import { JournalEntry } from "@/lib/types";
 import { getJournalEntriesList } from "@/lib/fetchJournalEntries";
@@ -7,6 +6,7 @@ import { syncMetadataSheetWithDocs } from "@/lib/syncMetadataSheet";
 
 import HomepagePatternBanner from "@/components/Pattern";
 import JournalEntriesGrid from "@/components/JournalEntriesGrid";
+import BlinkingCursor from "@/components/BlinkingCursor";
 
 export default function Home({
   journalDocsList,
@@ -28,8 +28,8 @@ export default function Home({
 
         <main className="flex-1 flex flex-col gap-48 pb-16">
           <section className="platform-intro text-sm flex flex-col gap-16">
-            <h2 className="welcome-title font-semibold text-xl flex gap-5 align-middle">
-              <span className="blinking-cursor bg-amber-400 w-4 h-26"></span>
+            <h2 className="welcome-title font-semibold text-xl flex items-center">
+              <BlinkingCursor />
 
               <span className="welcome-text">Welcome to Log of One</span>
             </h2>

@@ -12,11 +12,14 @@ import { formattedSlug } from "@/lib/utils";
 import Pattern from "@/components/Pattern";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 import { fetchMetadataSheet } from "@/lib/fetchMetadataSheet";
+import BlinkingCursor from "@/components/BlinkingCursor";
 
 export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
   const { journalMetadata, journalDocHtml } = journalDocData;
   const { doc_id, doc_title, doc_creation_date, doc_color_theme } =
     journalMetadata;
+
+  // TODO: fix this slug special characters wrongly formatting the url
 
   return (
     <>
@@ -32,8 +35,10 @@ export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
 
       <section className="journal-entry-page flex flex-col items-center justify-center gap-48">
         <div className="journal-entry-header flex flex-col gap-5 items-center fg-inter">
-          <h2 className="journal-entry-title text-xl font-semibold">
-            {doc_title}
+          <h2 className="journal-entry-title text-xl font-semibold flex items-center">
+            <BlinkingCursor />
+
+            <span>{doc_title}</span>
           </h2>
 
           <span className="journal-entry-date text-sm text-gray-500">

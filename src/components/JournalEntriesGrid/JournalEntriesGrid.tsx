@@ -1,5 +1,6 @@
 import { JournalEntry } from "@/lib/types";
 import JournalEntryCard from "./JournalEntryCard";
+import BlinkingCursor from "../BlinkingCursor";
 
 const JournalEntriesGrid = ({
   journalDocsList = [],
@@ -8,8 +9,10 @@ const JournalEntriesGrid = ({
 }) => {
   return (
     <section className="journal-enrtries-grid-wrapper w-full flex flex-col gap-16">
-      <h3 className="journal-entries-grid-title pl-8 border-l-4  border-amber-200 text-md font-semibold">
-        Entries
+      <h3 className="journal-entries-grid-title text-md font-semibold flex items-center">
+        <BlinkingCursor />
+
+        <span>Entries</span>
       </h3>
 
       {journalDocsList.length ? (
