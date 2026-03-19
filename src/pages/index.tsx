@@ -1,4 +1,6 @@
 import Head from "next/head";
+import Image from "next/image";
+
 import { JournalEntry } from "@/lib/types";
 import { getJournalEntriesList } from "@/lib/fetchJournalEntries";
 import { syncMetadataSheetWithDocs } from "@/lib/syncMetadataSheet";
@@ -26,39 +28,68 @@ export default function Home({
 
         <main className="flex-1 flex flex-col gap-48 pb-16">
           <section className="platform-intro text-sm flex flex-col gap-16">
-            <p className="font-semibold">
-              Welcome to Log of One : A space to share my internal reflections.
+            <h2 className="welcome-title font-semibold text-xl flex gap-5 align-middle">
+              <span className="blinking-cursor bg-amber-400 w-4 h-26"></span>
+
+              <span className="welcome-text">Welcome to Log of One</span>
+            </h2>
+
+            <p>
+              I've been meaning to share few snippets from different phases my
+              life for a while now.
             </p>
             <p>
-              The spectrum of experiences over the past few years has made the
-              present feel like a new life altogether, like a part of me got
-              dropped off somewhere along the way and these entries are in an
-              effort to rediscover that old self.
+              No it's not some extraordinary tale of a being and not that
+              anyones's life needs validation for being exciting enough to be
+              shared, rather it's more like a silent reflection on the bits and
+              pieces that makes the whole of who I am and where I stand today.
             </p>
             <p>
-              Over those years the dynamics of my relationships has evolved,
-              I've opened up more, been more vulnerable, which has greatly
-              helped me find things to latch on to as the storm passes by.
+              All the highs and lows that shape us, sometimes molding us into
+              someone new and at times into an old self that got dropped off
+              somewhere along the way.
             </p>
             <p>
-              One major culprit derailing my train of thoughts has been my
-              overthinking and procrastination. So sitting down with my thoughts
-              is my first line of defense to make some sense out of them, be
-              regular with it and eventually find my way through.
+              Consider these entries as simple accounts of self-introspection or
+              a rambling spree.
             </p>
             <p>
-              I've also realized many out there might struggling with similar
-              vices, so putting these thoughts out here is in hopes of sharing a
-              common ground and be there for each other.
+              The spectrum ranges from finding the cracks and the mends, to
+              things that excite me to explore more of. From my likes to quirks,
+              from my grief to smirks.
             </p>
             <p>
-              I'll be sharing everything -- from my likes to quirks, from my
-              grief to smirks.
+              One such tear in the seams of my self has been my gluttony for
+              overthinking. Riding with a one way ticket on the train of
+              thoughts until it derails.
             </p>
-            <p>Go ahead. Read some. Ponder more.</p>
+            <p>
+              So this can very well be considered as my first line of defense,
+              as an effort to sit down with the chaos and look for the eye of
+              the storm.
+            </p>
+            <p>A space to be more vulnerable, more open to life.</p>
+            {/* discuss the way the journal entries work:
+            - mention that most entries get updated as i tend to revisit them (a mind wanders) 
+            - sort them by last updated (check if we can get that data from google doc)
+            - allow users to bookmark them?
+            - allow users to like or unlike thme?
+            */}
           </section>
 
           <JournalEntriesGrid journalDocsList={journalDocsList} />
+
+          <blockquote className="note border-l-2 pl-8 border-amber-200 text-xs text-md text-gray-500">
+            <p>A quick note on the dynamic nature of these entries:</p>
+            <p>
+              I would be visiting many of these pieces over time to edit them or
+              add more to them.
+            </p>
+            <p>
+              They would be sorted by latest edits, so you can follow up on
+              those changes, or maybe not. LOL!!!
+            </p>
+          </blockquote>
         </main>
       </section>
     </>
