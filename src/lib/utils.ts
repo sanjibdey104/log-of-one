@@ -1,7 +1,21 @@
 export function formattedSlug(journalDoc: any): string {
   if (!journalDoc?.name) return "";
 
-  return journalDoc.name.trim().toLowerCase().replace(/\s+/g, "-");
+  return journalDoc.name
+    .toLowerCase()
+    .replace(/[^a-z0-9 -]/g, "") // remove special chars
+    .trim()
+    .replace(/\s+/g, "-") // replace spaces with hyphen
+    .replace(/-+/g, "-");
+}
+
+export function cleanSlug(slugString: string): string {
+  return slugString
+    .toLowerCase()
+    .replace(/[^a-z0-9 -]/g, "") // remove special chars
+    .trim()
+    .replace(/\s+/g, "-") // replace spaces with hyphen
+    .replace(/-+/g, "-"); // collapse multiple (consecutive) hyphens
 }
 
 export function formatDate(dateIsoString: string): string {

@@ -1,12 +1,14 @@
 import { JournalEntry } from "@/lib/types";
-import { formatDate } from "@/lib/utils";
+import { formatDate, formattedSlug } from "@/lib/utils";
 
 import Link from "next/link";
 import Pattern from "../Pattern";
 
 const JournalEntryCard = ({ journalDoc }: { journalDoc: JournalEntry }) => {
+  const cleanedSlug = formattedSlug(journalDoc);
+
   return (
-    <Link href={`/journal/${journalDoc.slug}`}>
+    <Link href={`/journal/${cleanedSlug}`}>
       <div className="journal-entry-card h-full shadow-(--box-shadow) rounded-sm p-12 flex flex-col gap-8">
         <section className="card-header">
           <Pattern
