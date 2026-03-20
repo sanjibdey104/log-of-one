@@ -19,7 +19,11 @@ export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
   const { doc_id, doc_title, doc_creation_date, doc_color_theme } =
     journalMetadata;
 
-  // TODO: fix this slug special characters wrongly formatting the url
+  // discuss the way the journal entries work:
+  //   - mention that most entries get updated as i tend to revisit them (a mind wanders)
+  //   - sort them by last updated (check if we can get that data from google doc)
+  //   - allow users to bookmark them?
+  //   - allow users to like or unlike thme?
 
   return (
     <>
@@ -41,7 +45,7 @@ export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
             <span>{doc_title}</span>
           </h2>
 
-          <span className="journal-entry-date text-sm text-gray-500">
+          <span className="journal-entry-date text-xs text-gray-400">
             {doc_creation_date}
           </span>
         </div>

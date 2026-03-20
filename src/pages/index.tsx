@@ -69,17 +69,11 @@ export default function Home({
               the storm.
             </p>
             <p>A space to be more vulnerable, more open to life.</p>
-            {/* discuss the way the journal entries work:
-            - mention that most entries get updated as i tend to revisit them (a mind wanders) 
-            - sort them by last updated (check if we can get that data from google doc)
-            - allow users to bookmark them?
-            - allow users to like or unlike thme?
-            */}
           </section>
 
           <JournalEntriesGrid journalDocsList={journalDocsList} />
 
-          <blockquote className="note border-l-2 pl-8 border-amber-200 text-xs text-md text-gray-500">
+          <blockquote className="note border-l-2 mt-16 pl-8 border-amber-200 text-xs text-md text-gray-500">
             <p>A quick note on the dynamic nature of these entries:</p>
             <p>
               I would be visiting many of these pieces over time to edit them or
