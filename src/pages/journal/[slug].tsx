@@ -39,7 +39,7 @@ export default function JournalEntry({ journalDocData }: JournalEntryDoc) {
 
       <section className="journal-entry-page flex flex-col items-center justify-center gap-48">
         <div className="journal-entry-header flex flex-col gap-5 items-center fg-inter">
-          <h2 className="journal-entry-title text-xl font-semibold flex items-center">
+          <h2 className="journal-entry-title text-xl font-semibold">
             <BlinkingCursor />
 
             <span>{doc_title}</span>

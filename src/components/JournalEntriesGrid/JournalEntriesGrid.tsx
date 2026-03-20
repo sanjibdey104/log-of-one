@@ -9,7 +9,7 @@ const JournalEntriesGrid = ({
 }) => {
   return (
     <section className="journal-enrtries-grid-wrapper w-full flex flex-col gap-16">
-      <h3 className="journal-entries-grid-title text-md font-semibold flex items-center">
+      <h3 className="journal-entries-grid-title text-md font-semibold">
         <BlinkingCursor />
 
         <span>Entries</span>

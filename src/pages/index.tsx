@@ -28,7 +28,7 @@ export default function Home({
 
         <main className="flex-1 flex flex-col gap-48 pb-16">
           <section className="platform-intro text-sm flex flex-col gap-16">
-            <h2 className="welcome-title font-semibold text-xl flex items-center">
+            <h2 className="welcome-title font-semibold text-xl">
               <BlinkingCursor />
 
               <span className="welcome-text">Welcome to Log of One</span>
